@@ -5,7 +5,6 @@ import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from '../Flex-Between/indext';
 import { navMenu } from '../../common/moks/navigate';
-import { tokens } from '../../theme';
 import Logo from '../../assets/images/slidebar/img1.svg'
 import { IsidebarProps } from '../../common/types/sidebar';
 
@@ -23,7 +22,7 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    //const colors = tokens(theme.palette.mode)
     
     useEffect(() => {
         setActive(pathname)
@@ -50,7 +49,7 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
                         <Box>
                             <FlexBetween>
                                 <Box className = {classes.brand}>
-                                    <img src={Logo} alt="Logo image"/>
+                                    <img src={Logo} alt="Logo"/>
                                     <Typography 
                                     variant='h1'
                                     className={classes.brandTitle}
