@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../utils/hook";
 import { getFavoriteAssets } from "../../store/thunks/assets";
 import { Box, Grid2} from "@mui/material";
 import { useStyles } from "./styles";
+import AreaChart from "../../components/charts/area-chart";
 
 
-const Home = () => {
+const Home: FC = (): JSX.Element => {
     const favoriteAssets: any[] = useAppSelector(state => state.assets.favoriteAssets)
     const dispatch = useAppDispatch()
     const classes = useStyles()
@@ -31,16 +32,18 @@ const Home = () => {
        console.log('Element',element)
         const currentPrice = element.data.prices[0]
                return (
-            <Grid2  key={element.name} size={{ xs: 12, sm: 6, lg: 6 }}>         
+            <Grid2   size={{ xs: 12, sm: 6, lg: 6 }} key={element.name}>         
                  <Grid2 container className={classes.topCardItem}>
                       <Grid2  size={{ xs: 12, sm: 6, lg: 6 }}>  
                 <h3 className={classes.assetName}>{element.name}</h3>
                     <div className={classes.itemDetails}>
-                        <h3 className={classes.cardPrice}>{currentPrice[1].toFixed(2)}</h3>
+                        <h3 className={classes.cardPrice}>
+                            ${currentPrice[1].toFixed(2)}
+                            </h3>
                         </div>   
                     </Grid2>
                       <Grid2  size={{ xs: 12, sm: 6, lg: 6 }}>  
-                <h5>Chart</h5>
+                <AreaChart data={element.data.prices}/>
                       </Grid2>
                 </Grid2>
             </Grid2>
