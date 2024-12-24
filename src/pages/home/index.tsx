@@ -6,10 +6,12 @@ import { useStyles } from "./styles";
 import AreaChart from "../../components/charts/area-chart";
 import TrendUp from '../../assets/images/chart/trendUp.svg'
 import TrendDown from '../../assets/images/chart/trendDown.svg'
+import LineChart from "../../components/charts/line-chart";
+import { IChartData } from "../../common/types/assets";
 
 
 const Home: FC = (): JSX.Element => {
-    const favoriteAssets: any[] = useAppSelector(state => state.assets.favoriteAssets)
+    const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets)
     const dispatch = useAppDispatch()
     const classes = useStyles()
     const fetchDataRef = useRef(false)
@@ -18,6 +20,7 @@ const Home: FC = (): JSX.Element => {
 
     const fetchData = useCallback((data: string[]) => {
         data.forEach((element: string) => {
+            
             dispatch(getFavoriteAssets(element))
         })
 
@@ -27,6 +30,7 @@ const Home: FC = (): JSX.Element => {
     useEffect(() => {
         if (fetchDataRef.current) return
         fetchDataRef.current = true
+        
         fetchData(favoriteAssetName)
             },[favoriteAssetName, fetchData])
     
@@ -35,9 +39,7 @@ const Home: FC = (): JSX.Element => {
         const currentPrice = element.singleAsset.map(
             (element: any) => element.current_price
         )
-        const currentCap = element.singleAsset.map(
-            (element: any) => element.market_cap
-        )
+       
         const changePrice = element.singleAsset.map(
             (element: any) => element.price_change_percentage_24h
         )
@@ -67,7 +69,7 @@ const Home: FC = (): JSX.Element => {
                             </div>
                     </Grid2>
                       <Grid2  size={{ xs: 12, sm: 6, lg: 6 }}>  
-                <AreaChart data={element.data}/>
+                <AreaChart data={element.price_chart_data}/>
                       </Grid2>
                 </Grid2>
             </Grid2>
@@ -76,9 +78,16 @@ const Home: FC = (): JSX.Element => {
     })
     return (
         <Box className = {classes.root}>
-                <Grid2 container spacing={2}>
+                <Grid2 container spacing={2} className={classes.areaChart}>
                    {renderFavoriteBlock}
                 </Grid2>
+                <Grid2 container className={classes.lineChartBlock}>
+                <Grid2  size={{ xs: 12, sm: 12, lg: 12}}> 
+                {filteredArray.length > 0 && <LineChart data={filteredArray} />}
+                    </Grid2>
+
+                </Grid2>
+
         </Box>
     );
 };
