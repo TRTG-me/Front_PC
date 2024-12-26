@@ -1,22 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { getFavoriteAssets } from "../../thunks/assets"
+import { createSlice } from '@reduxjs/toolkit'
+import { getFavoriteAssets, getTopPriceData } from '../../thunks/assets'
 
-const initialState: any ={
+const initialState: any = {
     assets: [],
-    favoriteAssets: []
+    favoriteAssets: [],
 }
 
-export const assetsSlice = createSlice({
+export const assetSlice = createSlice({
     name: 'assets',
     initialState,
     reducers: {},
-    extraReducers: builder => {
-        builder.addCase(getFavoriteAssets.fulfilled, (state:any, action) =>{
+    extraReducers: (builder) => {
+        builder.addCase(getFavoriteAssets.fulfilled, (state, action) => {
             state.favoriteAssets.push(action.payload)
         })
-
-    }
-
+        builder.addCase(getTopPriceData.fulfilled, (state, action) => {
+            state.assets = action.payload
+        })
+    },
 })
 
-export default assetsSlice.reducer
+export default assetSlice.reducer
