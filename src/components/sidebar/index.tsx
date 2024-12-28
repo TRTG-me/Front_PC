@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './style'
-import { Box, Drawer,IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme } from '@mui/material'
+import { Box, Drawer,IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme} from '@mui/material'
 import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from '../Flex-Between/indext';
 import { navMenu } from '../../common/moks/navigate';
 import Logo from '../../assets/images/slidebar/img1.svg'
 import { IsidebarProps } from '../../common/types/sidebar';
+import ThemeSwitcherComponent from '../ThemeSwitcherComponent';
+import SearchBarComponent from '../Search-block';
 
 
 const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.Element => {
@@ -22,7 +24,7 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
-    //const colors = tokens(theme.palette.mode)
+    
     
     useEffect(() => {
         setActive(pathname)
@@ -63,6 +65,13 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
                                 )}
                             </FlexBetween>
                         </Box>
+                        <List>
+                             {!isNonMobile && (
+                            <ListItem>
+                                <SearchBarComponent />
+                            </ListItem>
+                        )}
+                        </List>
                         <List className={classes.navList}   >
                             {
                                 navMenu.map((element)=>{
@@ -84,6 +93,13 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
                     </Box>
                     <Box width='100%'>
                         <List>
+                             {!isNonMobile && (
+                                <ListItem>
+                                    <Box padding='5px'>
+                                    <ThemeSwitcherComponent />
+                                    </Box>
+                                </ListItem>
+                            )}  
                             <ListItem>
                                 <ListItemButton className={classes.navItem}>
                                     <ListItemIcon>

@@ -18,8 +18,8 @@ export const useStyles = makeStyles((theme: Theme) => {
                 cursor: 'pointer'
             },
             iconBlock: {
-                paddingRight: '35px',
-                paddingTop: '10px',
+                paddingRight: '15px',
+                //paddingTop: '10px',
                 borderRight: `1px solid ${colors.borderColor}`
             },
             themeIcon: {
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme: Theme) => {
                 }
             },
             searchInput: {
-                padding: '18px 12px'
+                
             },
             toolBar: {
                 justifyContent: 'space-between',
