@@ -23,12 +23,13 @@ const Home: FC = (): JSX.Element => {
     const classes = useStyles()
     const fetchDataRef = useRef(false)
     const favoriteAssetName = useMemo(() =>['bitcoin', 'ethereum'], [])
-    const filteredArray: IChartData[] = favoriteAssetName
+    const filteredArray: IChartData[] = useMemo(() =>{
+        return favoriteAssetName
     .map(name => favoriteAssets.find(asset => asset.name === name)) // Ищем по имени
     .filter((asset): asset is IChartData => Boolean(asset)) // Убираем undefined
     .filter(
         (value, index, self) => index === self.findIndex(t => t.name === value.name)
-    );
+    )}, [favoriteAssets]);
 
     const filteredAssetArray = assetsArray
         .slice()
@@ -95,12 +96,12 @@ const Home: FC = (): JSX.Element => {
     })
     return (
         <Box className = {classes.root}>
-                <Grid2 container spacing={2} className={classes.areaChart}>
+                <Grid2 container spacing={2} className={classes.areaChart}  >
                    {renderFavoriteBlock}
                 </Grid2>
                 <Grid2 container className={classes.lineChartBlock}>
-                <Grid2  size={{ xs: 12, sm: 12, lg: 12}}> 
-                {filteredArray.length > 0 && <LineChart data={filteredArray} />}
+                <Grid2  size={{ xs: 12, sm: 12, lg: 12}} style={{width: "99%"}}> 
+                {filteredArray.length > 0 && <LineChart data={filteredArray} />} 
                     </Grid2>
 
                 </Grid2>

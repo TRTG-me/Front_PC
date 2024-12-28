@@ -44,14 +44,14 @@ const TopPriceComponent = (props: any) => {
                          ? `${classes.priceUp}`
                         : `${classes.priceDown}`}>
                                                
-                        {element.price_change_percentage_24h}</TableCell>
+                        {element.price_change_percentage_24h.toFixed(2)}</TableCell>
 
 
               <TableCell align="right"
                         className={
                         element.price_change_24h >0
                          ? `${classes.priceUp}`
-                        : `${classes.priceDown}`}>{element.price_change_24h}</TableCell>
+                        : `${classes.priceDown}`}>{element.price_change_24h.toFixed(2)}</TableCell>
          
             </TableRow>
           ))}

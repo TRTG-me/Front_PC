@@ -31,8 +31,7 @@ export const getTopPriceData = createAsyncThunk(
             const assets = await coinGeckoApi.get(
                 `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
             )
-            console.log('thunk2', assets.data)
-            return assets.data
+                      return assets.data
         } catch (error: any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message)
