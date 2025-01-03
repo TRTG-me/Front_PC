@@ -1,20 +1,22 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ISingleAsset } from '../../common/types/assets'
 import { useAppDispatch, useAppSelector } from '../../utils/hook'
-import { Avatar, Box, Button, Grid2, Typography } from '@mui/material'
+import { Alert, AlertColor, Avatar, Box, Button, Grid2, Snackbar, Typography } from '@mui/material'
 import FlexBetween from '../../components/Flex-Between/indext'
 import { useStyles } from './style'
 import { createWatchListRecord } from '../../store/thunks/assets'
 
 
 const SingleAssetPage: FC = (): JSX.Element => {
+const [open, setOpen] = useState(false)
+const [severity, setSeverity] = useState<AlertColor>('success')
 const navigate = useNavigate()
 const {id} = useParams()
 const classes = useStyles()
 const dispatch = useAppDispatch()
 const handleCreateRecord = () =>{
-      const data={
+      try{const data={
         name: '',
         assetId: ' '
       }
@@ -23,6 +25,19 @@ const handleCreateRecord = () =>{
        data.assetId=asset.id
       }
       dispatch(createWatchListRecord(data))
+      setSeverity('success')
+      setOpen(true)
+      setTimeout(() => {
+        setOpen(false)
+      }, 2000)
+
+      }catch (e){
+        setSeverity('error')
+      setOpen(true)    
+      setTimeout(() => {
+        setOpen(false)
+      }, 2000)  
+      }
 }
 
  const assetsArray: ISingleAsset[] = useAppSelector(
@@ -108,6 +123,11 @@ const handleCreateRecord = () =>{
                             Добавить в избраное
                         </Button>
                     </Box>
+                    <Snackbar open={open} autoHideDuration={6000}>
+                        <Alert severity={severity} sx={{ width: '100%' }}>
+                            Success!
+                        </Alert>
+                    </Snackbar>
         </Grid2>
       )}
     </>
