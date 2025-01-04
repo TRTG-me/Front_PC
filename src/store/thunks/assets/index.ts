@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { coinGeckoApi, instance, instanceAuth } from "../../../utils/axios";
+import { coinGeckoApi, instanceAuth } from "../../../utils/axios";
 
 export const getFavoriteAssets = createAsyncThunk(
     'coins/markets',
@@ -56,3 +56,8 @@ export const createWatchListRecord = createAsyncThunk(
         }
     },
 )
+
+
+
+
+

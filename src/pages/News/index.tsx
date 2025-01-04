@@ -8,10 +8,9 @@ const NewsComponent = () => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
   const {news} = useAppSelector(state => state.news)
-  console.log(news)
-  
+   
   const renderNewsBlock = news.map((element: any) => (
-    <Grid2 container className={classes.newsBlock}>
+    <Grid2 container key={element.id || element.url} className={classes.newsBlock}>
           <Grid2 size={{xs:12, md:3}}>
             <img src={element.imageurl} alt={element.category} />
           </Grid2>
@@ -34,7 +33,7 @@ const NewsComponent = () => {
 
   useEffect (() => {
     dispatch(getNews())
-  }, [])
+  }, [dispatch])
   return <Grid2 className={classes.root}>
       <Grid2 className={classes.blockTitle}>
         <Typography variant='h2'>Новости</Typography>
