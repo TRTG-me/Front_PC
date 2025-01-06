@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../utils/hook'
 import { useStyles } from './styles'
 import { Box, Grid2, TextField } from '@mui/material'
 import AppLoadingButton from '../loading-button'
-import { updateUserInfo } from '../../store/thunks/auth'
+import { getPublicUser, updateUserInfo } from '../../store/thunks/auth'
 
 
 
-const SettingsPersonalInfoComponent = () => {
+const SettingsPersonalInfoComponent: FC = (): JSX.Element => {
     const dispatch = useAppDispatch()
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
@@ -26,16 +26,23 @@ const SettingsPersonalInfoComponent = () => {
             
       
     }, [user])
-    const handleSubmit = (e: React.SyntheticEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        const data ={
+        const data = {
             firstName: name,
-            username:username,
+            username: username,
             email: email
         }
-        console.log('User', data)
-        dispatch(updateUserInfo(data))
-    }  
+        
+        try {
+            await dispatch(updateUserInfo(data)).unwrap()  
+                
+            await dispatch(getPublicUser()).unwrap()  
+            
+        } catch (error) {
+           
+        }
+    }
 
   return (
     <Grid2
