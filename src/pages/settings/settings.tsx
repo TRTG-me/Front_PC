@@ -9,6 +9,8 @@ import { useStyles } from './styles';
 import SettingsPersonalInfoComponent from '../../components/settings-personal-info';
 import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
+import ChangePasswordComponent from '../../components/change-password';
+import DeleteUserComponent from '../../components/delete_user';
 
 const SettingsComponent = () => {
   const [value, setValue] = useState(0)
@@ -46,10 +48,10 @@ const SettingsComponent = () => {
     <SettingsPersonalInfoComponent />
   </TabPanel>
   <TabPanel value={value} index={1}>
-    Item Two
+    <ChangePasswordComponent />
   </TabPanel>
   <TabPanel value={value} index={2}>
-    Item Three
+    <DeleteUserComponent />
   </TabPanel>
   </Grid2>
   )

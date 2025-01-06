@@ -12,15 +12,16 @@ const SettingsPersonalInfoComponent = () => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')  
-    const {user} = useAppSelector((state) => state.auth)
+    const {user} = useAppSelector((state) => state.auth.user)
     const classes = useStyles()
     
     useEffect(() => {
         if (user) {
-            console.log(user)
+           
             setName(user.firstName)
             setUsername(user.username)
             setEmail(user.email)
+           
         }
             
       
