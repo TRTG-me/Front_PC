@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import { IAreaChartProps } from '../../../common/types/assets'
+import { FC } from 'react'
 
 
 ChartJS.register(
@@ -26,7 +27,7 @@ ChartJS.register(
     Legend,
 )
 
-const AreaChart = (props: IAreaChartProps) => {
+const AreaChart: FC<IAreaChartProps> = (props: IAreaChartProps) => {
     const { data } = props
 
     const options = {

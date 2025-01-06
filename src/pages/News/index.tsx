@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../utils/hook'
 import { getNews } from '../../store/thunks/news'
 import { Box, Grid2, Link, Typography } from '@mui/material'
 import { useStyles } from './styles'
 
-const NewsComponent = () => {
+const NewsComponent:FC = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
   const {news} = useAppSelector(state => state.news)

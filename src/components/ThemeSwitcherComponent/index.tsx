@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { Grid2, IconButton, useTheme } from '@mui/material'
 import { DarkMode, LightMode, NotificationsNone } from '@mui/icons-material'
 import { ColorModeContext } from '../../theme'
 import { useStyles } from './style'
 
-const ThemeSwitcherComponent = () => {
+const ThemeSwitcherComponent: FC = (): JSX.Element => {
     const theme = useTheme()
     const colorMode: any = useContext(ColorModeContext)
     const classes = useStyles()

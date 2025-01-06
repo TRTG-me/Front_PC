@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Box, Grid2, useTheme } from '@mui/material';
@@ -12,7 +12,7 @@ import { getPublicUser } from '../../store/thunks/auth';
 import ChangePasswordComponent from '../../components/change-password';
 import DeleteUserComponent from '../../components/delete_user';
 
-const SettingsComponent = () => {
+const SettingsComponent:FC = ():JSX.Element => {
   const [value, setValue] = useState(0)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)

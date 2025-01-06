@@ -10,6 +10,7 @@ import { createWatchListRecord } from '../../store/thunks/assets'
 
 const SingleAssetPage: FC = (): JSX.Element => {
 const [open, setOpen] = useState(false)
+const [error, setError] = useState(false)
 const [severity, setSeverity] = useState<AlertColor>('success')
 const navigate = useNavigate()
 const {id} = useParams()
@@ -25,6 +26,7 @@ const handleCreateRecord = () =>{
        data.assetId=asset.id
       }
       dispatch(createWatchListRecord(data))
+      setError(false)
       setSeverity('success')
       setOpen(true)
       setTimeout(() => {
@@ -32,7 +34,8 @@ const handleCreateRecord = () =>{
       }, 2000)
 
       }catch (e){
-        setSeverity('error')
+      setError(true)
+      setSeverity('error')
       setOpen(true)    
       setTimeout(() => {
         setOpen(false)
@@ -125,7 +128,7 @@ const handleCreateRecord = () =>{
                     </Box>
                     <Snackbar open={open} autoHideDuration={6000}>
                         <Alert severity={severity} sx={{ width: '100%' }}>
-                            Success!
+                            {!error ? "Success!" : 'Ooops'}
                         </Alert>
                     </Snackbar>
         </Grid2>

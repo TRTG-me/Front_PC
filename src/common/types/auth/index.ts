@@ -22,8 +22,8 @@ export interface IPropsRegister {
     
 }
 
-export interface IAuthSatte {
-    user: IPublicUser,
+export interface IAuthState {
+    user: any,
     isLogged: boolean,
     isLoading: boolean
 
