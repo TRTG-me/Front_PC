@@ -29,6 +29,12 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
     useEffect(() => {
         setActive(pathname)
     }, [pathname])
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('name')
+        sessionStorage.removeItem('token')
+        navigate('/login')
+    }
     return (
         <Box component='nav'>
             {isOpen && (
@@ -101,7 +107,7 @@ const SidebarComponent: React.FC<IsidebarProps> = (props: IsidebarProps): JSX.El
                                 </ListItem>
                             )}  
                             <ListItem>
-                                <ListItemButton className={classes.navItem}>
+                                <ListItemButton className={classes.navItem} onClick={handleLogout}>
                                     <ListItemIcon>
                                         <LogoutOutlined />
                                     </ListItemIcon>
